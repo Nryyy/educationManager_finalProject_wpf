@@ -60,11 +60,13 @@ namespace DataManagment.Classes
 
                     if (existingGrade.Key != null)
                     {
-                        student.Grades.Remove(existingGrade);
-                        student.Grades.Add(updatedGrade);
+                        // Оновлюємо оцінку, якщо вже існує
+                        var index = student.Grades.IndexOf(existingGrade);
+                        student.Grades[index] = updatedGrade;
                     }
                     else
                     {
+                        // Додаємо нову оцінку
                         student.Grades.Add(updatedGrade);
                     }
                 }
@@ -82,7 +84,7 @@ namespace DataManagment.Classes
                     {
                         // Перетворення оцінок в рядок
                         string grades = string.Join(";", student.Grades.Select(g => $"{g.Key.Name}:{g.Value}"));
-                        return $"{student.Id},{student.FullName},{student.BirthDate:yyyy-MM-dd},{student.Email},{student.Group},{grades}";
+                        return $"{student.Id},{student.FullName},{student.BirthDate:yyyy-MM-dd},{student.Email},{GroupToString(student.Group)},{grades}";
                     });
                     break;
                 case "System.Windows.Controls.ComboBoxItem: JSON":
@@ -109,7 +111,7 @@ namespace DataManagment.Classes
                             var fullName = parts[1];
                             var birthDate = DateTime.Parse(parts[2]);
                             var email = parts[3];
-                            var group = parts[4];
+                            var group = StringToGroup(parts[4]);
 
                             var gradesList = new List<KeyValuePair<Course, int>>();
                             if (parts.Length >= 6 && !string.IsNullOrWhiteSpace(parts[5]))
@@ -147,6 +149,18 @@ namespace DataManagment.Classes
                     _students = _xmlFileRepository.LoadFromFile(filePath, "Students");
                     break;
             }
+        }
+
+        // Методи перетворення Group на рядок і навпаки
+        public string GroupToString(Group group)
+        {
+            return group?.Name ?? "Unknown Group"; // Перетворення об'єкта Group на рядок
+        }
+
+        public Group StringToGroup(string groupName)
+        {
+            // Повертаємо Group за назвою. Це можна адаптувати для пошуку в репозиторії.
+            return new Group { Name = groupName };
         }
     }
 }

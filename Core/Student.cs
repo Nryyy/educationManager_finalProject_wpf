@@ -14,7 +14,7 @@ namespace Core
         public string FullName { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
-        public string Group { get; set; }
+        public Group Group { get; set; }
         public List<KeyValuePair<Course, int>> Grades { get; set; } = new List<KeyValuePair<Course, int>>();
 
         public override string ToString()

@@ -72,20 +72,13 @@ namespace Education_Manager
 
         private void LoadGroupsComboBox()
         {
-            if (_groupRepository != null)
-            {
-                var groups = _groupRepository.GetAll().ToList();
-                GroupComboBox.ItemsSource = groups;
+            var groups = _groupRepository.GetAll().Select(g => g.Name).ToList(); // Завантаження назв груп
+            GroupComboBox.ItemsSource = groups;
 
-                if (!groups.Any())
-                {
-                    GroupComboBox.ItemsSource = null;
-                    MessageBox.Show("No groups available.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            else
+            if (!groups.Any())
             {
                 GroupComboBox.ItemsSource = null;
+                MessageBox.Show("No groups available.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -124,7 +117,7 @@ namespace Education_Manager
                 FullName = fullName,
                 BirthDate = birthDate.Value,
                 Email = email,
-                Group = group,
+                Group = new Group {Id = 1 , Name = group },
                 Grades = new List<KeyValuePair<Course, int>>()
             };
 
@@ -176,9 +169,9 @@ namespace Education_Manager
                 selectedStudent.BirthDate = selectedDate.Value;
             }
 
-            if (!string.IsNullOrWhiteSpace(newGroup) && newGroup != selectedStudent.Group)
+            if (!string.IsNullOrWhiteSpace(newGroup) && newGroup != selectedStudent.Group.Name) // Порівняння імені групи
             {
-                selectedStudent.Group = newGroup;
+                selectedStudent.Group = new Group { Name = newGroup }; // Створення нового об'єкта Group
             }
 
             selectedStudent.Email = newEmail;
@@ -187,6 +180,7 @@ namespace Education_Manager
             SaveStudentsToFile();
             LoadStudents();
         }
+
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {

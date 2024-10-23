@@ -56,10 +56,10 @@
                     <Run Text="{Binding Email}" />
                     <Run Text=", " />
                     <Run Text="Group: " />
-                    <Run Text="{Binding Group}" />
+                    <Run Text="{Binding Group.Name}" />
                     <Run Text=", " />
                     <Run Text="Id: " />
-                    <Run Text="{Binding Id}" />
+                    <Run Text="{Binding Group.Id}" />
                         </TextBlock>
                     </Border>
                 </DataTemplate>

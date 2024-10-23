@@ -4,7 +4,10 @@
     "FullName": "Іваненко Іван Іванович",
     "BirthDate": "2000-05-15T00:00:00",
     "Email": "ivanenko@example.com",
-    "Group": "Група 101",
+    "Group": {
+      "Id": 1,
+      "Name": "Група 101"
+    },
     "Grades": [
       {
         "Key": {
@@ -33,7 +36,21 @@
     "FullName": "Ivan Ivanov",
     "BirthDate": "2024-10-11T00:00:00",
     "Email": "ivanivanov@oa.edu.ua",
-    "Group": "Group: Group B Id: 2",
+    "Group": {
+      "Id": 2,
+      "Name": "Group B"
+    },
+    "Grades": []
+  },
+  {
+    "Id": 3,
+    "FullName": "Anton Vufhdsf",
+    "BirthDate": "2024-10-17T00:00:00",
+    "Email": "antonvufhdsf@oa.edu.ua",
+    "Group": {
+      "Id": 0,
+      "Name": "Group A"
+    },
     "Grades": []
   }
 ]
