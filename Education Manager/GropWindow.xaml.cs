@@ -24,21 +24,22 @@ namespace Education_Manager
             switch (fileType)
             {
                 case "System.Windows.Controls.ComboBoxItem: TXT":
-                    path = @"C:\Users\Nazariy\Desktop\Education Manager\Groups.txt";
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.txt";
                     break;
                 case "System.Windows.Controls.ComboBoxItem: JSON":
-                    path = @"C:\Users\Nazariy\Desktop\Education Manager\Groups.json";
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.json";
                     break;
                 case "System.Windows.Controls.ComboBoxItem: XML":
-                    path = @"C:\Users\Nazariy\Desktop\Education Manager\Groups.xml";
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.xml";
                     break;
                 case "System.Windows.Controls.ComboBoxItem: CSV":
-                    path = path = @"C:\Users\Nazariy\Desktop\Education Manager\Groups.csv";
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.csv";
                     break;
                 default:
                     MessageBox.Show("Unsupported file format", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
+
 
             _groupRepository = new GroupRepository();
             LoadGroupsFromFile();
