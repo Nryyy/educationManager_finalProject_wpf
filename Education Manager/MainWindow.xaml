@@ -1,0 +1,165 @@
+﻿<Window x:Class="Education_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Education_Manager"
+        mc:Ignorable="d"
+        Title="Education Manager" Height="450" Width="800">
+    <Grid Background="#FFE3E3E9">
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="366" Source="/bibl_b.jpg" Stretch="UniformToFill"/>
+        <Label Content="EDUCATION MANAGER" HorizontalAlignment="Left" Margin="435,52,0,0" VerticalAlignment="Top" Background="Transparent" Foreground="#FFCB0F0F" FontWeight="Bold" FontFamily="Arial Black" FontSize="24"/>
+        <Label Content="Manage knowledge - build the future" HorizontalAlignment="Left" Margin="466,74,0,0" VerticalAlignment="Top" Background="Transparent" Foreground="#FFB12323" FontWeight="Bold" FontFamily="Arial Black"/>
+        <Button x:Name="ButtonManageGroup" Content="Manage Group" 
+        HorizontalAlignment="Left" Height="40" Width="134" Margin="435,148,0,0" 
+        VerticalAlignment="Top" 
+        Background="#FFAC6845" Foreground="White" 
+        FontSize="16" FontWeight="Bold" 
+        BorderBrush="Transparent" Click="ButtonManageGroup_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <!-- Фон кнопки -->
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        CornerRadius="10">
+                            <!-- Вміст кнопки -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Анімація при наведенні -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- Анімація при натисканні -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <ComboBox x:Name="FormatComboBox" Width="200" Height="30" Margin="491,278,109,126">
+            <ComboBoxItem Content="JSON" />
+            <ComboBoxItem Content="TXT" />
+            <ComboBoxItem Content="XML" />
+            <ComboBoxItem Content="CSV" />
+        </ComboBox>
+        <Button x:Name="ButtonManageStudent" Content="Manage Student" 
+            HorizontalAlignment="Left" Height="40" Width="134" Margin="613,148,0,0" 
+            VerticalAlignment="Top" 
+            Background="#FFAC6845" Foreground="White" 
+            FontSize="16" FontWeight="Bold" 
+            BorderBrush="Transparent" Click="ButtonManageStudent_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <!-- Фон кнопки -->
+                        <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="10">
+                            <!-- Вміст кнопки -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Анімація при наведенні -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- Анімація при натисканні -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="ButtonManageSubject" Content="Manage Subject" 
+            HorizontalAlignment="Left" Height="40" Width="134" Margin="435,210,0,0" 
+            VerticalAlignment="Top" 
+            Background="#FFAC6845" Foreground="White" 
+            FontSize="16" FontWeight="Bold" 
+            BorderBrush="Transparent" Click="ButtonManageSubject_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <!-- Фон кнопки -->
+                        <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="10">
+                            <!-- Вміст кнопки -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Анімація при наведенні -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- Анімація при натисканні -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="ButtonCreateGiveRating" Content="Give a rating" 
+            HorizontalAlignment="Left" Height="40" Width="134" Margin="613,210,0,0" 
+            VerticalAlignment="Top" 
+            Background="#FFAC6845" Foreground="White" 
+            FontSize="16" FontWeight="Bold" 
+            BorderBrush="Transparent" Click="ButtonCreateGiveRating_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <!-- Фон кнопки -->
+                        <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="10">
+                            <!-- Вміст кнопки -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Анімація при наведенні -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- Анімація при натисканні -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+    </Grid>
+</Window>

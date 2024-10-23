@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Core
+{
+    public class Student
+    {
+        public int Id { get; set; }
+        public string FullName { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Email { get; set; }
+        public string Group { get; set; }
+        public List<KeyValuePair<string, int>> Grades { get; set; } = new List<KeyValuePair<string, int>>();
+
+        public override string ToString()
+        {
+            return $"Id: {Id}; Full Name: {FullName}; Email: {Email}; Grades: {string.Join(", ", Grades)}";
+        }
+    }
+}

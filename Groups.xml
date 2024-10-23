@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Groups>
+    <Group>
+        <Id>1</Id>
+        <Name>Group A</Name>
+    </Group>
+    <Group>
+        <Id>2</Id>
+        <Name>Group B</Name>
+    </Group>
+    <Group>
+        <Id>3</Id>
+        <Name>Group C</Name>
+    </Group>
+    <Group>
+        <Id>4</Id>
+        <Name>Group D</Name>
+    </Group>
+</Groups>

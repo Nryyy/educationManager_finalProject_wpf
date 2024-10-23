@@ -1,0 +1,19 @@
+[
+  {
+    "Id": 1,
+    "FullName": "Іваненко Іван Іванович",
+    "BirthDate": "2000-05-15T00:00:00",
+    "Email": "ivanenko@example.com",
+    "Group": "Група 101",
+    "Grades": [
+      {
+        "Key": "Math",
+        "Value": 85
+      },
+      {
+        "Key": "Physics",
+        "Value": 90
+      }
+    ]
+  }
+]

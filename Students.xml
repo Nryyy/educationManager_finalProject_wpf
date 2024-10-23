@@ -1,0 +1,36 @@
+<Students>
+  <Student>
+    <Id>1</Id>
+    <FullName>Іваненко Іван Іванович</FullName>
+    <BirthDate>2000-05-15</BirthDate>
+    <Email>ivanenko@example.com</Email>
+    <Group>Група 101</Group>
+    <Grades>
+      <Grade>
+        <Subject>Математика</Subject>
+        <Score>85</Score>
+      </Grade>
+      <Grade>
+        <Subject>Фізика</Subject>
+        <Score>90</Score>
+      </Grade>
+    </Grades>
+  </Student>
+  <Student>
+    <Id>2</Id>
+    <FullName>Петренко Петро Петрович</FullName>
+    <BirthDate>1999-10-12</BirthDate>
+    <Email>petrenko@example.com</Email>
+    <Group>Група 102</Group>
+    <Grades>
+      <Grade>
+        <Subject>Інформатика</Subject>
+        <Score>88</Score>
+      </Grade>
+      <Grade>
+        <Subject>Хімія</Subject>
+        <Score>92</Score>
+      </Grade>
+    </Grades>
+  </Student>
+</Students>
