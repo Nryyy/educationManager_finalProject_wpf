@@ -46,12 +46,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <ComboBox x:Name="FormatComboBox" Width="200" Height="30" Margin="491,278,109,126">
-            <ComboBoxItem Content="JSON" />
-            <ComboBoxItem Content="TXT" />
-            <ComboBoxItem Content="XML" />
-            <ComboBoxItem Content="CSV" />
-        </ComboBox>
         <Button x:Name="ButtonManageStudent" Content="Manage Student" 
             HorizontalAlignment="Left" Height="40" Width="134" Margin="613,148,0,0" 
             VerticalAlignment="Top" 
@@ -160,6 +154,29 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <ComboBox x:Name="FormatComboBox" Width="200" Height="35" Margin="590,389,10,0"
+          BorderBrush="#FFA45B5B" Background="#FFECECEC" 
+          Foreground="#FF333333" FontSize="14" FontWeight="Bold" 
+          VerticalAlignment="Top">
+            <ComboBox.Resources>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="Margin" Value="0,2"/>
+                    <Setter Property="Foreground" Value="#FF673232"/>
+                    <Setter Property="Background" Value="#FFECECEC"/>
+                    <Setter Property="BorderBrush" Value="#FFA45B5B"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Opacity" Value="1"/>
+                </Style>
+            </ComboBox.Resources>
+            <ComboBoxItem Content="JSON" />
+            <ComboBoxItem Content="TXT" />
+            <ComboBoxItem Content="XML" />
+            <ComboBoxItem Content="CSV" />
+        </ComboBox>
+        <Label Content="Choose file type:" HorizontalAlignment="Left" Height="32" Margin="435,390,0,0" VerticalAlignment="Top" Width="180" FontWeight="Bold" FontSize="18" Background="Transparent" Foreground="#FF1810C0"/>
 
     </Grid>
 </Window>

@@ -1,83 +1,45 @@
 <Students>
   <Student>
     <Id>1</Id>
-    <FullName>Іван Іваненко</FullName>
-    <BirthDate>2001-02-15T00:00:00</BirthDate>
-    <Email>ivan@gmail.com</Email>
-    <Group>Group A</Group>
+    <FullName>Іваненко Іван Іванович</FullName>
+    <BirthDate>2000-05-15T00:00:00</BirthDate>
+    <Email>ivanenko@example.com</Email>
+    <Group>
+      <Id>1</Id>
+      <Name>Група 101</Name>
+    </Group>
     <Grades>
       <Grade>
         <Key>
           <Id>1</Id>
-          <Name>Математика</Name>
-          <Description>Курс математики</Description>
+          <Name>Math</Name>
+          <Description>Basic Mathematics</Description>
           <MaxStudents>30</MaxStudents>
-        </Key>
-        <Value>95</Value>
-      </Grade>
-      <Grade>
-        <Key>
-          <Id>2</Id>
-          <Name>Фізика</Name>
-          <Description>Курс фізики</Description>
-          <MaxStudents>25</MaxStudents>
-        </Key>
-        <Value>88</Value>
-      </Grade>
-    </Grades>
-  </Student>
-  <Student>
-    <Id>2</Id>
-    <FullName>Олена Петрівна</FullName>
-    <BirthDate>2000-06-10T00:00:00</BirthDate>
-    <Email>olena@gmail.com</Email>
-    <Group>Group B</Group>
-    <Grades>
-      <Grade>
-        <Key>
-          <Id>3</Id>
-          <Name>Хімія</Name>
-          <Description>Курс хімії</Description>
-          <MaxStudents>20</MaxStudents>
-        </Key>
-        <Value>78</Value>
-      </Grade>
-      <Grade>
-        <Key>
-          <Id>4</Id>
-          <Name>Біологія</Name>
-          <Description>Курс біології</Description>
-          <MaxStudents>25</MaxStudents>
-        </Key>
-        <Value>90</Value>
-      </Grade>
-    </Grades>
-  </Student>
-  <Student>
-    <Id>3</Id>
-    <FullName>Петро Іванович</FullName>
-    <BirthDate>2002-12-05T00:00:00</BirthDate>
-    <Email>petro@gmail.com</Email>
-    <Group>Group C</Group>
-    <Grades>
-      <Grade>
-        <Key>
-          <Id>5</Id>
-          <Name>Інформатика</Name>
-          <Description>Курс інформатики</Description>
-          <MaxStudents>30</MaxStudents>
+          <Students></Students>
         </Key>
         <Value>85</Value>
       </Grade>
       <Grade>
         <Key>
           <Id>2</Id>
-          <Name>Фізика</Name>
-          <Description>Курс фізики</Description>
+          <Name>Physics</Name>
+          <Description>Physics 101</Description>
           <MaxStudents>25</MaxStudents>
+          <Students></Students>
         </Key>
-        <Value>80</Value>
+        <Value>90</Value>
       </Grade>
     </Grades>
+  </Student>
+  <Student>
+    <Id>2</Id>
+    <FullName>Ivan Ivanov</FullName>
+    <BirthDate>2024-10-11T00:00:00</BirthDate>
+    <Email>ivanivanov@oa.edu.ua</Email>
+    <Group>
+      <Id>2</Id>
+      <Name>Group B</Name>
+    </Group>
+    <Grades></Grades>
   </Student>
 </Students>
