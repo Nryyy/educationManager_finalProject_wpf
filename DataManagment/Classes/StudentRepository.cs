@@ -53,10 +53,10 @@ namespace DataManagment.Classes
                 student.Email = updatedStudent.Email;
                 student.Group = updatedStudent.Group;
 
-                // Перевірка наявності ключа через Any
+                // Оновлення оцінок
                 foreach (var updatedGrade in updatedStudent.Grades)
                 {
-                    var existingGrade = student.Grades.FirstOrDefault(g => g.Key == updatedGrade.Key);
+                    var existingGrade = student.Grades.FirstOrDefault(g => g.Key.Id == updatedGrade.Key.Id);
 
                     if (existingGrade.Key != null)
                     {
@@ -76,11 +76,12 @@ namespace DataManagment.Classes
             switch (fileType)
             {
                 case "System.Windows.Controls.ComboBoxItem: TXT":
+                case "System.Windows.Controls.ComboBoxItem: CSV":
                     var textRepo = new TextFileRepository<Student>();
                     textRepo.SaveToFile(filePath, _students, student =>
                     {
-                        // Перетворюємо оцінки в рядок
-                        string grades = string.Join(";", student.Grades.Select(g => $"{g.Key}:{g.Value}"));
+                        // Перетворення оцінок в рядок
+                        string grades = string.Join(";", student.Grades.Select(g => $"{g.Key.Name}:{g.Value}"));
                         return $"{student.Id},{student.FullName},{student.BirthDate:yyyy-MM-dd},{student.Email},{student.Group},{grades}";
                     });
                     break;
@@ -90,14 +91,6 @@ namespace DataManagment.Classes
                 case "System.Windows.Controls.ComboBoxItem: XML":
                     _xmlFileRepository.SaveToFile(filePath, _students, "Students");
                     break;
-                case "System.Windows.Controls.ComboBoxItem: CSV":
-                    var csvRepo = new TextFileRepository<Student>();
-                    csvRepo.SaveToFile(filePath, _students, student =>
-                    {
-                        string grades = string.Join(";", student.Grades.Select(g => $"{g.Key}:{g.Value}"));
-                        return $"{student.Id},{student.FullName},{student.BirthDate:yyyy-MM-dd},{student.Email},{student.Group},{grades}";
-                    });
-                    break;
             }
         }
 
@@ -106,6 +99,7 @@ namespace DataManagment.Classes
             switch (fileType)
             {
                 case "System.Windows.Controls.ComboBoxItem: TXT":
+                case "System.Windows.Controls.ComboBoxItem: CSV":
                     var textRepo = new TextFileRepository<Student>();
                     _students = textRepo.LoadFromFile(filePath, line =>
                     {
@@ -117,8 +111,7 @@ namespace DataManagment.Classes
                             var email = parts[3];
                             var group = parts[4];
 
-                            // Обробка оцінок
-                            var gradesDict = new List<KeyValuePair<string, int>>();
+                            var gradesList = new List<KeyValuePair<Course, int>>();
                             if (parts.Length >= 6 && !string.IsNullOrWhiteSpace(parts[5]))
                             {
                                 var gradesData = parts[5].Split(';');
@@ -127,7 +120,9 @@ namespace DataManagment.Classes
                                     var gradeParts = grade.Split(':');
                                     if (gradeParts.Length == 2 && int.TryParse(gradeParts[1], out int gradeValue))
                                     {
-                                        gradesDict.Add(new KeyValuePair<string, int>(gradeParts[0], gradeValue));
+                                        // Тут ви можете завантажити курси відповідно до назви або Id
+                                        var course = new Course { Name = gradeParts[0] };
+                                        gradesList.Add(new KeyValuePair<Course, int>(course, gradeValue));
                                     }
                                 }
                             }
@@ -139,49 +134,10 @@ namespace DataManagment.Classes
                                 BirthDate = birthDate,
                                 Email = email,
                                 Group = group,
-                                Grades = gradesDict
+                                Grades = gradesList
                             };
                         }
                         return null; // Якщо рядок не коректний, повертаємо null.
-                    }).Where(student => student != null).ToList(); // Фільтруємо null значення.
-                    break;
-                case "System.Windows.Controls.ComboBoxItem: CSV":
-                    var csvRepo = new TextFileRepository<Student>();
-                    _students = csvRepo.LoadFromFile(filePath, line =>
-                    {
-                        var parts = line.Split(',');
-                        if (parts.Length >= 5 && int.TryParse(parts[0], out int id))
-                        {
-                            var fullName = parts[1];
-                            var birthDate = DateTime.Parse(parts[2]);
-                            var email = parts[3];
-                            var group = parts[4];
-
-                            var gradesDict = new List<KeyValuePair<string, int>>();
-                            if (parts.Length >= 6 && !string.IsNullOrWhiteSpace(parts[5]))
-                            {
-                                var gradesData = parts[5].Split(';');
-                                foreach (var grade in gradesData)
-                                {
-                                    var gradeParts = grade.Split(':');
-                                    if (gradeParts.Length == 2 && int.TryParse(gradeParts[1], out int gradeValue))
-                                    {
-                                        gradesDict.Add(new KeyValuePair<string, int>(gradeParts[0], gradeValue));
-                                    }
-                                }
-                            }
-
-                            return new Student
-                            {
-                                Id = id,
-                                FullName = fullName,
-                                BirthDate = birthDate,
-                                Email = email,
-                                Group = group,
-                                Grades = gradesDict
-                            };
-                        }
-                        return null;
                     }).Where(student => student != null).ToList();
                     break;
                 case "System.Windows.Controls.ComboBoxItem: JSON":

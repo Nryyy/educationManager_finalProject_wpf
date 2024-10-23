@@ -15,7 +15,7 @@ namespace Core
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public string Group { get; set; }
-        public List<KeyValuePair<string, int>> Grades { get; set; } = new List<KeyValuePair<string, int>>();
+        public List<KeyValuePair<Course, int>> Grades { get; set; } = new List<KeyValuePair<Course, int>>();
 
         public override string ToString()
         {

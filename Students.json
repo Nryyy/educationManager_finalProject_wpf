@@ -7,13 +7,33 @@
     "Group": "Група 101",
     "Grades": [
       {
-        "Key": "Math",
+        "Key": {
+          "Id": 1,
+          "Name": "Math",
+          "Description": "Basic Mathematics",
+          "MaxStudents": 30,
+          "Students": null
+        },
         "Value": 85
       },
       {
-        "Key": "Physics",
+        "Key": {
+          "Id": 2,
+          "Name": "Physics",
+          "Description": "Physics 101",
+          "MaxStudents": 25,
+          "Students": null
+        },
         "Value": 90
       }
     ]
+  },
+  {
+    "Id": 2,
+    "FullName": "Ivan Ivanov",
+    "BirthDate": "2024-10-11T00:00:00",
+    "Email": "ivanivanov@oa.edu.ua",
+    "Group": "Group: Group B Id: 2",
+    "Grades": []
   }
 ]

@@ -125,7 +125,7 @@ namespace Education_Manager
                 BirthDate = birthDate.Value,
                 Email = email,
                 Group = group,
-                Grades = new List<KeyValuePair<string, int>>()
+                Grades = new List<KeyValuePair<Course, int>>()
             };
 
             _studentRepository.Add(student);
