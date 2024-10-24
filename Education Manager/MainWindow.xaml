@@ -177,6 +177,42 @@
             <ComboBoxItem Content="CSV" />
         </ComboBox>
         <Label Content="Choose file type:" HorizontalAlignment="Left" Height="32" Margin="435,390,0,0" VerticalAlignment="Top" Width="180" FontWeight="Bold" FontSize="18" Background="Transparent" Foreground="#FF1810C0"/>
+        <Button x:Name="GenerateReport" Content="Generate Report" 
+            HorizontalAlignment="Left" Height="40" Width="134" Margin="519,267,0,0" 
+            VerticalAlignment="Top" 
+            Background="#FFAC6845" Foreground="White" 
+            FontSize="16" FontWeight="Bold" 
+            BorderBrush="Transparent" Click="GenerateReport_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <!-- Фон кнопки -->
+                        <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            CornerRadius="10">
+                            <!-- Вміст кнопки -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Анімація при наведенні -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                            <Setter TargetName="border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="4"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- Анімація при натисканні -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#e59866"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </Window>

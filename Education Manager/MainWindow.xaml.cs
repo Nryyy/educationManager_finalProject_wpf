@@ -46,5 +46,11 @@ namespace Education_Manager
             CourseWindow courseWindow = new CourseWindow(this);
             courseWindow.Show();
         }
+
+        private void GenerateReport_Click(object sender, RoutedEventArgs e)
+        {
+            ReportWindow reportWindow = new ReportWindow(this);
+            reportWindow.Show();
+        }
     }
 }

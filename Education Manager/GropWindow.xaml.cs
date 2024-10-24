@@ -17,7 +17,6 @@ namespace Education_Manager
         {
             InitializeComponent();
             fileType = mainWindow.FormatComboBox.SelectedItem.ToString();
-            MessageBox.Show($"{fileType}");
 
             switch (fileType)
             {
