@@ -1,0 +1,106 @@
+﻿<Courses>
+	<Course>
+		<Id>1</Id>
+		<Name>Основи програмування</Name>
+		<Description>Курс для початківців з програмування</Description>
+		<MaxStudents>30</MaxStudents>
+		<StudentsGroup>
+			<Id>1</Id>
+			<Name>Група A</Name>
+			<Students>
+				<Student>
+					<Id>1</Id>
+					<FullName>Іван Іваненко</FullName>
+				</Student>
+				<Student>
+					<Id>2</Id>
+					<FullName>Петро Петренко</FullName>
+				</Student>
+			</Students>
+		</StudentsGroup>
+	</Course>
+
+	<Course>
+		<Id>2</Id>
+		<Name>Алгоритми і структури даних</Name>
+		<Description>Поглиблений курс з алгоритмів</Description>
+		<MaxStudents>25</MaxStudents>
+		<StudentsGroup>
+			<Id>2</Id>
+			<Name>Група B</Name>
+			<Students>
+				<Student>
+					<Id>3</Id>
+					<FullName>Марія Марієнко</FullName>
+				</Student>
+				<Student>
+					<Id>4</Id>
+					<FullName>Олена Олененко</FullName>
+				</Student>
+			</Students>
+		</StudentsGroup>
+	</Course>
+
+	<Course>
+		<Id>3</Id>
+		<Name>Бази даних</Name>
+		<Description>Основи роботи з базами даних</Description>
+		<MaxStudents>20</MaxStudents>
+		<StudentsGroup>
+			<Id>3</Id>
+			<Name>Група C</Name>
+			<Students>
+				<Student>
+					<Id>5</Id>
+					<FullName>Сергій Сергієнко</FullName>
+				</Student>
+				<Student>
+					<Id>6</Id>
+					<FullName>Олександр Олександров</FullName>
+				</Student>
+			</Students>
+		</StudentsGroup>
+	</Course>
+
+	<Course>
+		<Id>4</Id>
+		<Name>Математичний аналіз</Name>
+		<Description>Курс з математичного аналізу</Description>
+		<MaxStudents>40</MaxStudents>
+		<StudentsGroup>
+			<Id>4</Id>
+			<Name>Група D</Name>
+			<Students>
+				<Student>
+					<Id>7</Id>
+					<FullName>Анна Анненко</FullName>
+				</Student>
+				<Student>
+					<Id>8</Id>
+					<FullName>Тарас Тарасенко</FullName>
+				</Student>
+			</Students>
+		</StudentsGroup>
+	</Course>
+
+	<Course>
+		<Id>5</Id>
+		<Name>Машинне навчання</Name>
+		<Description>Курс з основ машинного навчання</Description>
+		<MaxStudents>35</MaxStudents>
+		<StudentsGroup>
+			<Id>5</Id>
+			<Name>Група E</Name>
+			<Students>
+				<Student>
+					<Id>9</Id>
+					<FullName>Юлія Ющенко</FullName>
+				</Student>
+				<Student>
+					<Id>10</Id>
+					<FullName>Андрій Андрієнко</FullName>
+				</Student>
+			</Students>
+		</StudentsGroup>
+	</Course>
+</Courses>

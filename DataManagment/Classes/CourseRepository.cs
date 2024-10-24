@@ -1,6 +1,7 @@
 ﻿using Core;
 using DataManagment.Interfaces;
 using DataManagment.ReadersAndWriters;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -10,7 +11,7 @@ namespace DataManagment.Classes
     {
         private List<Course> _courses;
         private readonly JSONFileRepository<Course> _jsonFileRepository;
-        public readonly XmlFileRepository<Course> _xmlFileRepository;
+        private readonly XmlFileRepository<Course> _xmlFileRepository;
 
         public CourseRepository()
         {
@@ -53,6 +54,7 @@ namespace DataManagment.Classes
                 course.MaxStudents = updatedCourse.MaxStudents;
 
                 // Тут можна оновити список студентів, якщо потрібно
+                course.StudentsGroup = updatedCourse.StudentsGroup; // Оновлення групи студентів
             }
         }
 
@@ -65,7 +67,9 @@ namespace DataManagment.Classes
                     var textRepo = new TextFileRepository<Course>();
                     textRepo.SaveToFile(filePath, _courses, course =>
                     {
-                        return $"{course.Id},{course.Name},{course.Description},{course.MaxStudents}";
+                        // Зберігання інформації про групу і студентів
+                        string studentInfo = string.Join(";", course.StudentsGroup?.Students.Select(s => $"{s.Id}:{s.FullName}")) ?? string.Empty;
+                        return $"{course.Id},{course.Name},{course.Description},{course.MaxStudents},{course.StudentsGroup.Name},{studentInfo}";
                     });
                     break;
                 case "System.Windows.Controls.ComboBoxItem: JSON":
@@ -87,11 +91,25 @@ namespace DataManagment.Classes
                     _courses = textRepo.LoadFromFile(filePath, line =>
                     {
                         var parts = line.Split(',');
-                        if (parts.Length >= 4 && int.TryParse(parts[0], out int id))
+                        if (parts.Length >= 5 && int.TryParse(parts[0], out int id))
                         {
                             var name = parts[1];
                             var description = parts[2];
                             var maxStudents = int.TryParse(parts[3], out int max) ? max : 0;
+                            var groupName = parts[4];
+                            var students = parts.Length > 5 ? parts[5].Split(';').Select(s =>
+                            {
+                                var studentParts = s.Split(':');
+                                if (studentParts.Length == 2 && int.TryParse(studentParts[0], out int studentId))
+                                {
+                                    return new Student
+                                    {
+                                        Id = studentId,
+                                        FullName = studentParts[1]
+                                    };
+                                }
+                                return null;
+                            }).Where(s => s != null).ToList() : new List<Student>();
 
                             return new Course
                             {
@@ -99,7 +117,12 @@ namespace DataManagment.Classes
                                 Name = name,
                                 Description = description,
                                 MaxStudents = maxStudents,
-                                Students = new List<Student>() // Тут можна завантажити студентів
+                                StudentsGroup = new Group
+                                {
+                                    Id = id, // Можливо, потрібно визначити логіку для ідентифікації групи
+                                    Name = groupName,
+                                    Students = students
+                                }
                             };
                         }
                         return null; // Якщо рядок не коректний, повертаємо null.

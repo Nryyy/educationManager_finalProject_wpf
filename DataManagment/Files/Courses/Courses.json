@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1,
+    "Name": "Mathematics",
+    "Description": "An introduction to mathematical concepts.",
+    "MaxStudents": 30,
+    "StudentsGroup": {
+      "Id": 1,
+      "Name": "Math Group A",
+      "Students": [
+        {
+          "Id": 1,
+          "FullName": "Ivan Ivanov",
+          "Email": "ivan.ivanov@example.com",
+          "BirthDate": "2001-05-15T00:00:00"
+        },
+        {
+          "Id": 2,
+          "FullName": "Petro Petrov",
+          "Email": "petro.petrov@example.com",
+          "BirthDate": "2000-10-20T00:00:00"
+        }
+      ]
+    }
+  },
+  {
+    "Id": 2,
+    "Name": "Physics",
+    "Description": "Study of the fundamental principles of physics.",
+    "MaxStudents": 25,
+    "StudentsGroup": {
+      "Id": 2,
+      "Name": "Physics Group B",
+      "Students": [
+        {
+          "Id": 3,
+          "FullName": "Olena Olenska",
+          "Email": "olena.olenska@example.com",
+          "BirthDate": "2002-08-30T00:00:00"
+        },
+        {
+          "Id": 4,
+          "FullName": "Mykola Mykolenko",
+          "Email": "mykola.mykolenko@example.com",
+          "BirthDate": "1999-12-10T00:00:00"
+        }
+      ]
+    }
+  },
+  {
+    "Id": 3,
+    "Name": "Computer Science",
+    "Description": "An overview of computer science principles.",
+    "MaxStudents": 40,
+    "StudentsGroup": {
+      "Id": 3,
+      "Name": "CS Group C",
+      "Students": [
+        {
+          "Id": 5,
+          "FullName": "Andriy Andriyenko",
+          "Email": "andriy.andriyenko@example.com",
+          "BirthDate": "2001-03-22T00:00:00"
+        },
+        {
+          "Id": 6,
+          "FullName": "Tetyana Tetyankina",
+          "Email": "tetyana.tetyankina@example.com",
+          "BirthDate": "2000-01-14T00:00:00"
+        }
+      ]
+    }
+  }
+]

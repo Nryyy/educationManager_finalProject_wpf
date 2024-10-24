@@ -11,9 +11,12 @@ namespace Education_Manager
     public partial class CourseWindow : Window
     {
         private readonly CourseRepository _courseRepository;
-        string fileType;
+        private readonly GroupRepository _groupRepository; // Додано для роботи з групами
+        private string fileType;
         private readonly string path;
+        private readonly string pathGroup;
         private List<Course> _courses;
+        private List<Group> _groups; // Список груп
 
         public CourseWindow(MainWindow mainWindow)
         {
@@ -27,6 +30,7 @@ namespace Education_Manager
                     break;
                 case "System.Windows.Controls.ComboBoxItem: JSON":
                     path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.json";
+                    pathGroup = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.json";
                     break;
                 case "System.Windows.Controls.ComboBoxItem: XML":
                     path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.xml";
@@ -40,8 +44,19 @@ namespace Education_Manager
             }
 
             _courseRepository = new CourseRepository();
+            _groupRepository = new GroupRepository(); // Ініціалізація репозиторія груп
+            LoadGroupsFromFile(); // Завантаження груп з файлу
             LoadCoursesFromFile();
             LoadCourses();
+        }
+
+        private void LoadGroupsFromFile()
+        {
+            _groupRepository.LoadFromFile(pathGroup, fileType);
+
+            // Заповнення ComboBox групами
+            _groups = _groupRepository.GetAll().ToList();
+            GroupComboBox.ItemsSource = _groups.Select(g => g.Name).ToList(); // Додано до ComboBox
         }
 
         private void LoadCoursesFromFile()
@@ -74,13 +89,16 @@ namespace Education_Manager
 
             int newCourseId = _courses.Count > 0 ? _courses.Max(c => c.Id) + 1 : 1;
 
+            var selectedGroupName = (string)GroupComboBox.SelectedItem; // Вибрана група
+            var selectedGroup = _groups.FirstOrDefault(g => g.Name == selectedGroupName); // Знайти групу за вибором
+
             var course = new Course
             {
                 Id = newCourseId,
                 Name = courseName,
                 Description = courseDescription,
                 MaxStudents = maxStudents,
-                Students = new List<Student>() // Пустий список студентів
+                StudentsGroup = selectedGroup // Призначити групу
             };
 
             _courseRepository.Add(course);
@@ -94,6 +112,7 @@ namespace Education_Manager
             CourseNameTextBox.Clear();
             CourseDescriptionTextBox.Clear();
             MaxStudentsTextBox.Clear();
+            GroupComboBox.SelectedItem = null; // Скинути вибір у ComboBox
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
@@ -119,6 +138,10 @@ namespace Education_Manager
             selectedCourse.Name = newName;
             selectedCourse.Description = newDescription;
             selectedCourse.MaxStudents = newMaxStudents;
+
+            var selectedGroupName = (string)GroupComboBox.SelectedItem; // Вибрана група
+            var selectedGroup = _groups.FirstOrDefault(g => g.Name == selectedGroupName); // Знайти групу за вибором
+            selectedCourse.StudentsGroup = selectedGroup; // Призначити нову групу
 
             _courseRepository.Update(selectedCourse);
             SaveCoursesToFile();

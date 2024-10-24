@@ -16,11 +16,11 @@ namespace Core
 
         public int MaxStudents { get; set; }
 
-        public List<Student> Students { get; set; }
+        public Group StudentsGroup { get; set; }
 
         public override string ToString()
         {
-            return $"Id: {Id}; Name: {Name}; Descripton: {Description}; Maxstudents: {MaxStudents}";
+            return $"Id: {Id}; Name: {Name}; Descripton: {Description}";
         }
     }
 }
