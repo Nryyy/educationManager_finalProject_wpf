@@ -27,6 +27,7 @@ namespace Education_Manager
             {
                 case "System.Windows.Controls.ComboBoxItem: TXT":
                     path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.txt";
+                    pathGroup = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.txt";
                     break;
                 case "System.Windows.Controls.ComboBoxItem: JSON":
                     path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.json";
@@ -34,9 +35,11 @@ namespace Education_Manager
                     break;
                 case "System.Windows.Controls.ComboBoxItem: XML":
                     path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.xml";
+                    pathGroup = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.xml";
                     break;
                 case "System.Windows.Controls.ComboBoxItem: CSV":
                     path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.csv";
+                    pathGroup = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Groups\Groups.csv";
                     break;
                 default:
                     MessageBox.Show("Unsupported file format", "Error", MessageBoxButton.OK, MessageBoxImage.Error);

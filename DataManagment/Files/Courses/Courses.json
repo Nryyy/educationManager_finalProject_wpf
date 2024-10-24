@@ -11,14 +11,28 @@
         {
           "Id": 1,
           "FullName": "Ivan Ivanov",
+          "BirthDate": "2001-05-15T00:00:00",
           "Email": "ivan.ivanov@example.com",
-          "BirthDate": "2001-05-15T00:00:00"
+          "Group": null,
+          "Grades": []
         },
         {
           "Id": 2,
           "FullName": "Petro Petrov",
+          "BirthDate": "2000-10-20T00:00:00",
           "Email": "petro.petrov@example.com",
-          "BirthDate": "2000-10-20T00:00:00"
+          "Group": null,
+          "Grades": [
+            {
+              "Key": {
+                "Id": 1,
+                "Name": "Mathematics",
+                "Description": "An introduction to mathematical concepts.",
+                "MaxStudents": 30
+              },
+              "Value": 89
+            }
+          ]
         }
       ]
     }
@@ -35,14 +49,18 @@
         {
           "Id": 3,
           "FullName": "Olena Olenska",
+          "BirthDate": "2002-08-30T00:00:00",
           "Email": "olena.olenska@example.com",
-          "BirthDate": "2002-08-30T00:00:00"
+          "Group": null,
+          "Grades": []
         },
         {
           "Id": 4,
           "FullName": "Mykola Mykolenko",
+          "BirthDate": "1999-12-10T00:00:00",
           "Email": "mykola.mykolenko@example.com",
-          "BirthDate": "1999-12-10T00:00:00"
+          "Group": null,
+          "Grades": []
         }
       ]
     }
@@ -59,14 +77,18 @@
         {
           "Id": 5,
           "FullName": "Andriy Andriyenko",
+          "BirthDate": "2001-03-22T00:00:00",
           "Email": "andriy.andriyenko@example.com",
-          "BirthDate": "2001-03-22T00:00:00"
+          "Group": null,
+          "Grades": []
         },
         {
           "Id": 6,
           "FullName": "Tetyana Tetyankina",
+          "BirthDate": "2000-01-14T00:00:00",
           "Email": "tetyana.tetyankina@example.com",
-          "BirthDate": "2000-01-14T00:00:00"
+          "Group": null,
+          "Grades": []
         }
       ]
     }

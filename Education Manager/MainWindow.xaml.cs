@@ -37,8 +37,8 @@ namespace Education_Manager
 
         private void ButtonCreateGiveRating_Click(object sender, RoutedEventArgs e)
         {
-            //GradeWindow gradeWindow = new GradeWindow();
-            //gradeWindow.Show();
+            GradeWindow gradeWindow = new GradeWindow(this);
+            gradeWindow.Show();
         }
 
         private void ButtonManageSubject_Click(object sender, RoutedEventArgs e)
