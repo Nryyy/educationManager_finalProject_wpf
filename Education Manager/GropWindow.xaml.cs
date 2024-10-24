@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Core;
+using DataManagment.Classes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Core;
-using DataManagment.Classes;
-using Microsoft.VisualBasic.FileIO;
 
 namespace Education_Manager
 {
@@ -39,7 +37,6 @@ namespace Education_Manager
                     MessageBox.Show("Unsupported file format", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
             }
-
 
             _groupRepository = new GroupRepository();
             LoadGroupsFromFile();
@@ -120,27 +117,29 @@ namespace Education_Manager
                         GroupNameTextBox.Clear();
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Error, please enter a valid group name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a group to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void DeleteGroupButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedGroup = (Group)GroupsListBox.SelectedItem;
-
             if (selectedGroup != null)
             {
-                var result = MessageBox.Show($"You want to delete: {selectedGroup}. Are you sure?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    _groupRepository.Delete(selectedGroup.Id);
-                    SaveGroupsToFile();
-                    LoadGroups();
-                }
+                _groupRepository.Delete(selectedGroup.Id);
+                SaveGroupsToFile();
+                LoadGroups();
             }
             else
             {
-                MessageBox.Show("Please, you must choose a group to delete!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a group to delete.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

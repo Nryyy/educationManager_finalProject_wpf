@@ -1,2 +1,5 @@
-1,CS-22
-2,CS-23
+1,Група 101,1:Іваненко Іван Іванович:ivanenko@example.com:2000-05-15|2:Петров Петро Петрович:petrov@example.com:2001-06-20
+2,Група 102,3:Сидоренко Сидір Сидорович:sidorenko@example.com:2002-07-25|4:Мельник Микола Миколайович:melnik@example.com:2003-08-30
+3,Група 103,5:Іванова Ірина Іванівна:ivanova@example.com:2000-09-01
+4,CS-24,6:Nazarii Soboliuk:nazariisoboliuk@oa.edu.ua:2024-04-15
+5,CS-25,7:Daniel Lizak:daniellizak@oa.edu.ua:2024-10-22

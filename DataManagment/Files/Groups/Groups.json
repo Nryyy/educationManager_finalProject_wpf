@@ -1,14 +1,81 @@
 [
   {
     "Id": 1,
-    "Name": "Group A"
+    "Name": "Group 101",
+    "Students": [
+      {
+        "Id": 1,
+        "FullName": "Іванов Іван Іванович",
+        "BirthDate": "2002-05-15T00:00:00",
+        "Email": "ivanov.ivan@example.com",
+        "Group": null,
+        "Grades": []
+      },
+      {
+        "Id": 2,
+        "FullName": "Петренко Петро Петрович",
+        "BirthDate": "2001-11-20T00:00:00",
+        "Email": "petrenko.petro@example.com",
+        "Group": null,
+        "Grades": []
+      }
+    ]
   },
   {
     "Id": 2,
-    "Name": "Group B"
+    "Name": "Group 202",
+    "Students": [
+      {
+        "Id": 3,
+        "FullName": "Сидоренко Олександр Олександрович",
+        "BirthDate": "2003-02-25T00:00:00",
+        "Email": "sydorenko.oleksandr@example.com",
+        "Group": null,
+        "Grades": []
+      },
+      {
+        "Id": 4,
+        "FullName": "Коваленко Марія Іванівна",
+        "BirthDate": "2002-07-10T00:00:00",
+        "Email": "kovalenko.maria@example.com",
+        "Group": null,
+        "Grades": []
+      },
+      {
+        "Id": 5,
+        "FullName": "Захарченко Андрій Вікторович",
+        "BirthDate": "2001-09-14T00:00:00",
+        "Email": "zakharchenko.andriy@example.com",
+        "Group": null,
+        "Grades": []
+      }
+    ]
   },
   {
     "Id": 3,
-    "Name": "Group C"
+    "Name": "Group 303",
+    "Students": [
+      {
+        "Id": 6,
+        "FullName": "Мельник Ольга Сергіївна",
+        "BirthDate": "2002-03-18T00:00:00",
+        "Email": "melnyk.olga@example.com",
+        "Group": null,
+        "Grades": []
+      }
+    ]
+  },
+  {
+    "Id": 4,
+    "Name": "CS-24",
+    "Students": [
+      {
+        "Id": 4,
+        "FullName": "Nazarii Soboliuk",
+        "BirthDate": "2024-10-16T00:00:00",
+        "Email": "nazariisoboliuk@oa.edu.ua",
+        "Grades": []
+      }
+    ]
   }
 ]

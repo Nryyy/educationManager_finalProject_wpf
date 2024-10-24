@@ -2,95 +2,98 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Core; // Містить клас Course
-using DataManagment.Classes; // Містить CourseRepository
+using Core;
+using DataManagment.Classes;
 using DataManagment.Interfaces;
 
 namespace Education_Manager
 {
-    /// <summary>
-    /// Interaction logic for CourseWindow.xaml
-    /// </summary>
     public partial class CourseWindow : Window
     {
         private readonly CourseRepository _courseRepository;
-        private readonly string path = @"C:\Users\Nazariy\Desktop\Education Manager\Courses.txt";
+        string fileType;
+        private readonly string path;
         private List<Course> _courses;
 
-        public CourseWindow()
+        public CourseWindow(MainWindow mainWindow)
         {
             InitializeComponent();
-            _courseRepository = new CourseRepository();
+            fileType = mainWindow.FormatComboBox.SelectedItem.ToString();
 
+            switch (fileType)
+            {
+                case "System.Windows.Controls.ComboBoxItem: TXT":
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.txt";
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: JSON":
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.json";
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: XML":
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.xml";
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: CSV":
+                    path = @"C:\Users\Nazariy\Desktop\Education Manager\DataManagment\Files\Courses\Courses.csv";
+                    break;
+                default:
+                    MessageBox.Show("Unsupported file format", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+            }
+
+            _courseRepository = new CourseRepository();
             LoadCoursesFromFile();
+            LoadCourses();
         }
 
         private void LoadCoursesFromFile()
         {
-            _courseRepository.LoadFromFile(path);
-            LoadCourses();
+            _courseRepository.LoadFromFile(path, fileType);
         }
 
         private void SaveCoursesToFile()
         {
-            _courseRepository.SaveToFile(path);
+            _courseRepository.SaveToFile(path, fileType);
         }
 
         private void LoadCourses()
         {
             _courses = _courseRepository.GetAll().ToList();
-            if (_courses != null && _courses.Count > 0)
-            {
-                CoursesListBox.ItemsSource = _courses;
-            }
-            else
-            {
-                CoursesListBox.ItemsSource = null;
-            }
+            CoursesListBox.ItemsSource = _courses.Any() ? _courses : null;
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             string courseName = CourseNameTextBox.Text;
             string courseDescription = CourseDescriptionTextBox.Text;
-            int maxStudents;
+            int maxStudents = int.TryParse(MaxStudentsTextBox.Text, out int max) ? max : 0;
 
-            var existingCourse = _courses.FirstOrDefault(c => c.Name.Equals(courseName, StringComparison.OrdinalIgnoreCase));
-
-            if (existingCourse != null) 
+            if (string.IsNullOrWhiteSpace(courseName) || string.IsNullOrWhiteSpace(courseDescription) || maxStudents <= 0)
             {
-                MessageBox.Show("Course already exist!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please fill all fields correctly!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-            else
+
+            int newCourseId = _courses.Count > 0 ? _courses.Max(c => c.Id) + 1 : 1;
+
+            var course = new Course
             {
-                if (!string.IsNullOrWhiteSpace(courseName) &&
-                !string.IsNullOrWhiteSpace(courseDescription) &&
-                int.TryParse(MaxStudentsTextBox.Text, out maxStudents))
-                {
-                    int newCourseId = _courses.Count > 0 ? _courses.Max(c => c.Id) + 1 : 1;
+                Id = newCourseId,
+                Name = courseName,
+                Description = courseDescription,
+                MaxStudents = maxStudents,
+                Students = new List<Student>() // Пустий список студентів
+            };
 
-                    var course = new Course
-                    {
-                        Id = newCourseId,
-                        Name = courseName,
-                        Description = courseDescription,
-                        MaxStudents = maxStudents
-                    };
+            _courseRepository.Add(course);
+            SaveCoursesToFile();
+            LoadCourses();
+            ClearInputFields();
+        }
 
-                    _courseRepository.Add(course);
-                    SaveCoursesToFile();
-                    LoadCourses();
-
-                    // Очищуємо поля після додавання
-                    CourseNameTextBox.Clear();
-                    CourseDescriptionTextBox.Clear();
-                    MaxStudentsTextBox.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please fill all fields!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
+        private void ClearInputFields()
+        {
+            CourseNameTextBox.Clear();
+            CourseDescriptionTextBox.Clear();
+            MaxStudentsTextBox.Clear();
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
@@ -103,26 +106,23 @@ namespace Education_Manager
                 return;
             }
 
-            string newCourseName = CourseNameTextBox.Text;
-            string newCourseDescription = CourseDescriptionTextBox.Text;
-            int maxStudents;
+            string newName = CourseNameTextBox.Text;
+            string newDescription = CourseDescriptionTextBox.Text;
+            int newMaxStudents = int.TryParse(MaxStudentsTextBox.Text, out int max) ? max : selectedCourse.MaxStudents;
 
-            if (!string.IsNullOrWhiteSpace(newCourseName) &&
-                !string.IsNullOrWhiteSpace(newCourseDescription) &&
-                int.TryParse(MaxStudentsTextBox.Text, out maxStudents))
+            if (string.IsNullOrWhiteSpace(newName) || string.IsNullOrWhiteSpace(newDescription) || newMaxStudents <= 0)
             {
-                selectedCourse.Name = newCourseName;
-                selectedCourse.Description = newCourseDescription;
-                selectedCourse.MaxStudents = maxStudents;
+                MessageBox.Show("Please fill all fields correctly!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-                _courseRepository.Update(selectedCourse);
-                SaveCoursesToFile();
-                LoadCourses();
-            }
-            else
-            {
-                MessageBox.Show("Please fill all fields!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            selectedCourse.Name = newName;
+            selectedCourse.Description = newDescription;
+            selectedCourse.MaxStudents = newMaxStudents;
+
+            _courseRepository.Update(selectedCourse);
+            SaveCoursesToFile();
+            LoadCourses();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -139,22 +139,6 @@ namespace Education_Manager
                     SaveCoursesToFile();
                     LoadCourses();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please select a course to delete.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        private void CoursesListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            var selectedCourse = (Course)CoursesListBox.SelectedItem;
-
-            if (selectedCourse != null)
-            {
-                CourseNameTextBox.Text = selectedCourse.Name;
-                CourseDescriptionTextBox.Text = selectedCourse.Description;
-                MaxStudentsTextBox.Text = selectedCourse.MaxStudents.ToString();
             }
         }
     }

@@ -1,20 +1,22 @@
 ﻿using Core;
 using DataManagment.Interfaces;
-using System;
-using System.Collections.Generic;
+using DataManagment.ReadersAndWriters;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataManagment.Classes
 {
-    public class CourseRepository : ICourse
+    public class CourseRepository : ICourseRepository
     {
         private List<Course> _courses;
+        private readonly JSONFileRepository<Course> _jsonFileRepository;
+        public readonly XmlFileRepository<Course> _xmlFileRepository;
 
-        public CourseRepository() 
+        public CourseRepository()
         {
             _courses = new List<Course>();
+            _jsonFileRepository = new JSONFileRepository<Course>();
+            _xmlFileRepository = new XmlFileRepository<Course>();
         }
 
         public void Add(Course course)
@@ -25,7 +27,7 @@ namespace DataManagment.Classes
         public void Delete(int id)
         {
             var course = _courses.FirstOrDefault(c => c.Id == id);
-            if (course != null) 
+            if (course != null)
             {
                 _courses.Remove(course);
             }
@@ -44,51 +46,71 @@ namespace DataManagment.Classes
         public void Update(Course updatedCourse)
         {
             var course = _courses.FirstOrDefault(c => c.Id == updatedCourse.Id);
-            if (course != null) 
+            if (course != null)
             {
+                course.Name = updatedCourse.Name;
                 course.Description = updatedCourse.Description;
                 course.MaxStudents = updatedCourse.MaxStudents;
-                course.Name = updatedCourse.Name;
+
+                // Тут можна оновити список студентів, якщо потрібно
             }
         }
 
-        public void SaveToFile(string filePath)
+        public void SaveToFile(string filePath, string fileType)
         {
-            using (StreamWriter writer = new StreamWriter(filePath))
+            switch (fileType)
             {
-                foreach (var course in _courses)
-                {
-                    writer.WriteLine($"{course.Id},{course.Name},{course.Description},{course.MaxStudents}");
-                }
-            }
-        }
-
-        public void LoadFromFile(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                _courses.Clear(); // Очищаємо список перед завантаженням нових даних
-                var lines = File.ReadAllLines(filePath);
-
-                foreach (var line in lines)
-                {
-                    var data = line.Split(',');
-
-                    if (data.Length >= 4 && int.TryParse(data[0], out int id))
+                case "System.Windows.Controls.ComboBoxItem: TXT":
+                case "System.Windows.Controls.ComboBoxItem: CSV":
+                    var textRepo = new TextFileRepository<Course>();
+                    textRepo.SaveToFile(filePath, _courses, course =>
                     {
-                        var name = data[1];
-                        var description = data[2];
-                        var maxStudents = int.Parse(data[3]);
+                        return $"{course.Id},{course.Name},{course.Description},{course.MaxStudents}";
+                    });
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: JSON":
+                    _jsonFileRepository.SaveToFile(filePath, _courses);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: XML":
+                    _xmlFileRepository.SaveToFile(filePath, _courses, "Courses");
+                    break;
+            }
+        }
 
-                        _courses.Add(new Course
+        public void LoadFromFile(string filePath, string fileType)
+        {
+            switch (fileType)
+            {
+                case "System.Windows.Controls.ComboBoxItem: TXT":
+                case "System.Windows.Controls.ComboBoxItem: CSV":
+                    var textRepo = new TextFileRepository<Course>();
+                    _courses = textRepo.LoadFromFile(filePath, line =>
+                    {
+                        var parts = line.Split(',');
+                        if (parts.Length >= 4 && int.TryParse(parts[0], out int id))
                         {
-                            Id = id,
-                            Name = name,
-                            Description = description,
-                            MaxStudents = maxStudents
-                        });
-                    }
-                }
+                            var name = parts[1];
+                            var description = parts[2];
+                            var maxStudents = int.TryParse(parts[3], out int max) ? max : 0;
+
+                            return new Course
+                            {
+                                Id = id,
+                                Name = name,
+                                Description = description,
+                                MaxStudents = maxStudents,
+                                Students = new List<Student>() // Тут можна завантажити студентів
+                            };
+                        }
+                        return null; // Якщо рядок не коректний, повертаємо null.
+                    }).Where(course => course != null).ToList();
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: JSON":
+                    _courses = _jsonFileRepository.LoadFromFile(filePath);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: XML":
+                    _courses = _xmlFileRepository.LoadFromFile(filePath, "Courses");
+                    break;
             }
         }
     }

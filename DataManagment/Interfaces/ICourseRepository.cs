@@ -7,7 +7,7 @@ using Core;
 
 namespace DataManagment.Interfaces
 {
-    public interface ICourse
+    public interface ICourseRepository
     {
         void Add(Course course);
         void Update(Course course);

@@ -10,9 +10,14 @@ namespace DataManagment.ReadersAndWriters
 {
     public class JSONFileRepository<T>
     {
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore // Ігнорує циклічні посилання
+        };
+
         public void SaveToFile(string filePath, IEnumerable<T> items)
         {
-            var json = JsonConvert.SerializeObject(items, Newtonsoft.Json.Formatting.Indented);
+            var json = JsonConvert.SerializeObject(items, Newtonsoft.Json.Formatting.Indented, settings);
             File.WriteAllText(filePath, json);
         }
 

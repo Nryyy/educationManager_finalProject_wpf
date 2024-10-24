@@ -93,7 +93,7 @@ namespace Education_Manager
         {
             string fullName = FullNameTextBox.Text;
             DateTime? birthDate = DateOfBirthPicker.SelectedDate;
-            string group = GroupComboBox.Text;
+            string groupName = GroupComboBox.Text; // Отримання імені групи з ComboBox
             string email = $"{fullName.Replace(" ", "").ToLower()}@oa.edu.ua";
 
             var existingStudent = _students.FirstOrDefault(s => s.FullName.Equals(fullName, StringComparison.OrdinalIgnoreCase));
@@ -104,9 +104,18 @@ namespace Education_Manager
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(fullName) || birthDate == null || string.IsNullOrWhiteSpace(group))
+            if (string.IsNullOrWhiteSpace(fullName) || birthDate == null || string.IsNullOrWhiteSpace(groupName))
             {
                 MessageBox.Show("Please fill all fields!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Пошук групи в репозиторії за іменем
+            var selectedGroup = _groupRepository.GetAll().FirstOrDefault(g => g.Name.Equals(groupName, StringComparison.OrdinalIgnoreCase));
+
+            if (selectedGroup == null)
+            {
+                MessageBox.Show("Group not found!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -118,15 +127,24 @@ namespace Education_Manager
                 FullName = fullName,
                 BirthDate = birthDate.Value,
                 Email = email,
-                Group = new Group {Id = 1 , Name = group },
+                Group = selectedGroup, // Призначення вибраної групи студенту
                 Grades = new List<KeyValuePair<Course, int>>()
             };
 
+            // Додавання студента до репозиторію
             _studentRepository.Add(student);
             SaveStudentsToFile();
+
+            // Додавання студента до вибраної групи
+            selectedGroup.Students.Add(student);
+
+            // Збереження оновленого списку груп
+            _groupRepository.SaveToFile(pathGroup, fileType);
+
             LoadStudents();
             ClearInputFields();
         }
+
 
         private void ClearInputFields()
         {

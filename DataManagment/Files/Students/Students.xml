@@ -1,45 +1,24 @@
-<Students>
+<?xml version="1.0" encoding="utf-8"?>
+<Students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Student>
     <Id>1</Id>
     <FullName>Іваненко Іван Іванович</FullName>
     <BirthDate>2000-05-15T00:00:00</BirthDate>
     <Email>ivanenko@example.com</Email>
-    <Group>
-      <Id>1</Id>
-      <Name>Група 101</Name>
-    </Group>
-    <Grades>
-      <Grade>
-        <Key>
-          <Id>1</Id>
-          <Name>Math</Name>
-          <Description>Basic Mathematics</Description>
-          <MaxStudents>30</MaxStudents>
-          <Students></Students>
-        </Key>
-        <Value>85</Value>
-      </Grade>
-      <Grade>
-        <Key>
-          <Id>2</Id>
-          <Name>Physics</Name>
-          <Description>Physics 101</Description>
-          <MaxStudents>25</MaxStudents>
-          <Students></Students>
-        </Key>
-        <Value>90</Value>
-      </Grade>
-    </Grades>
+    <Grades />
   </Student>
   <Student>
     <Id>2</Id>
     <FullName>Ivan Ivanov</FullName>
     <BirthDate>2024-10-11T00:00:00</BirthDate>
     <Email>ivanivanov@oa.edu.ua</Email>
-    <Group>
-      <Id>2</Id>
-      <Name>Group B</Name>
-    </Group>
-    <Grades></Grades>
+    <Grades />
+  </Student>
+  <Student>
+    <Id>3</Id>
+    <FullName>Nazarii Soboliuk</FullName>
+    <BirthDate>2024-10-08T00:00:00</BirthDate>
+    <Email>nazariisoboliuk@oa.edu.ua</Email>
+    <Grades />
   </Student>
 </Students>

@@ -6,7 +6,8 @@
     "Email": "ivanenko@example.com",
     "Group": {
       "Id": 1,
-      "Name": "Група 101"
+      "Name": "Група 101",
+      "Students": []
     },
     "Grades": [
       {
@@ -38,7 +39,8 @@
     "Email": "ivanivanov@oa.edu.ua",
     "Group": {
       "Id": 2,
-      "Name": "Group B"
+      "Name": "Group B",
+      "Students": []
     },
     "Grades": []
   },
@@ -49,7 +51,20 @@
     "Email": "antonvufhdsf@oa.edu.ua",
     "Group": {
       "Id": 0,
-      "Name": "Group A"
+      "Name": "Group A",
+      "Students": []
+    },
+    "Grades": []
+  },
+  {
+    "Id": 4,
+    "FullName": "Nazarii Soboliuk",
+    "BirthDate": "2024-10-16T00:00:00",
+    "Email": "nazariisoboliuk@oa.edu.ua",
+    "Group": {
+      "Id": 4,
+      "Name": "CS-24",
+      "Students": []
     },
     "Grades": []
   }

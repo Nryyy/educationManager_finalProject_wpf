@@ -16,7 +16,7 @@ namespace Core
 
         public int MaxStudents { get; set; }
 
-        public List<Student> Students { get; private set; }
+        public List<Student> Students { get; set; }
 
         public override string ToString()
         {

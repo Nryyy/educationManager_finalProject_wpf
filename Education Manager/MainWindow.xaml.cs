@@ -43,7 +43,7 @@ namespace Education_Manager
 
         private void ButtonManageSubject_Click(object sender, RoutedEventArgs e)
         {
-            CourseWindow courseWindow = new CourseWindow();
+            CourseWindow courseWindow = new CourseWindow(this);
             courseWindow.Show();
         }
     }

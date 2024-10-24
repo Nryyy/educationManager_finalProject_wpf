@@ -1,1 +1,7 @@
-1,Nazarii Soboliuk,2024-10-10,nazariisoboliuk@oa.edu.ua,Group: CS-22 Id: 1,
+1,�������� ���� ��������,2000-05-15,ivanenko@example.com,����� 101,����������:85;Գ����:90
+2,������ ����� ��������,2001-06-20,petrov@example.com,����� 101,������:75;ճ��:80
+3,��������� ���� ���������,2002-07-25,sidorenko@example.com,����� 102,����������:88;Գ����:92
+4,������� ������ �����������,2003-08-30,melnik@example.com,����� 102,������:78;ճ��:85
+5,������� ����� ��������,2000-09-01,ivanova@example.com,����� 103,����������:95;Գ����:98
+6,Nazarii Soboliuk,2024-10-15,nazariisoboliuk@oa.edu.ua,CS-24,
+7,Daniel Lizak,2024-10-22,daniellizak@oa.edu.ua,CS-25,
